@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddKataBowling", "TddKataBowling\TddKataBowling.csproj", "{0B0E33F9-A39B-4FC5-8AFB-81FA21FFE0AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddKataBowlingTests", "TddKataBowlingTests\TddKataBowlingTests.csproj", "{8B722475-2D44-4D1F-86CF-D581C9EEFF41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B0E33F9-A39B-4FC5-8AFB-81FA21FFE0AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B0E33F9-A39B-4FC5-8AFB-81FA21FFE0AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B0E33F9-A39B-4FC5-8AFB-81FA21FFE0AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B0E33F9-A39B-4FC5-8AFB-81FA21FFE0AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B722475-2D44-4D1F-86CF-D581C9EEFF41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B722475-2D44-4D1F-86CF-D581C9EEFF41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B722475-2D44-4D1F-86CF-D581C9EEFF41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B722475-2D44-4D1F-86CF-D581C9EEFF41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
