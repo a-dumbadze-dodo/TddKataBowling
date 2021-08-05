@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using TddKataBowling;
 
 namespace TddKataBowlingTests
 {
@@ -7,12 +8,21 @@ namespace TddKataBowlingTests
 		[SetUp]
 		public void Setup()
 		{
+			
+			
 		}
 
 		[Test]
-		public void Test1()
-		{
-			Assert.Pass();
+		public void TestScore() {
+			
+			var knockedPins = 1;
+			var game = new Game();
+			
+			game.Roll(knockedPins);
+			
+			var score = game.GetScore();
+			
+			Assert.AreEqual(score,knockedPins);
 		}
 	}
 }
