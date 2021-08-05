@@ -24,8 +24,8 @@ namespace TddKataBowling
 				var currentKnockedPins = _score[i];
 				var previousKnockedPins = i < 1 ? 0 : _score[i - 1];
 				var previous2KnockedPins = i < 2 ? 0 : _score[i - 2];
-
-				if (previousKnockedPins == 10 || previous2KnockedPins == 10)
+				var isSpare = previous2KnockedPins + previousKnockedPins==10;
+				if (previousKnockedPins == 10 || previous2KnockedPins == 10 || isSpare)
 				{
 					result += currentKnockedPins * 2;
 				}
