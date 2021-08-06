@@ -2,7 +2,7 @@
 
 namespace TddKataBowling
 {
-	public class ConstraintFrameException : Exception
+	public class ConstraintFrameException : ConstraintGameException
 	{
 		public ConstraintFrameException()
 		{
@@ -13,6 +13,15 @@ namespace TddKataBowling
 		}
 	}
 
+    public class ConstraintGameException : Exception {
+        public ConstraintGameException()
+        {
+        }
+
+        public ConstraintGameException(string message) : base(message)
+        {
+        }
+    }
 	public class TooManyKnockedPins : ConstraintFrameException
 	{
 		public TooManyKnockedPins(string message) : base(message)

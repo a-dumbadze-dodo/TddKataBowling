@@ -11,6 +11,19 @@ namespace TddKataBowling {
         }
 
         public void Roll(int knockedPins) {
+            this.ValidateForAddScore(knockedPins);
+            this._score.Add(new Roll(knockedPins, this.IsSecondRoll() ? 1 : 0));
+        }
+
+        private void ValidateForAddScore(int knockedPins) {
+            var strikes = this.GetStrikesCount();
+            var rollWithoutStrikesCount = this.GetRollsWithoutStrikes().Count();
+            if (this._score.Count() > 10) {
+                var isSpare = IsSpare(this._score.Last(),this._score[this._score.Count-1]);
+                if (strikes * 2 + rollWithoutStrikesCount > 20 && !this._score.Last().IsStrike() && !isSpare) {
+                    throw new ConstraintGameException("More than 10 frames(20 rolls) per game");
+                }
+            }
             if (knockedPins > 10) {
                 throw new TooManyKnockedPins("More than 10 pins are knocked in one roll");
             }
@@ -18,11 +31,16 @@ namespace TddKataBowling {
             if (this.IsSecondRoll() && GetLastScoreWithCurrentKnockedPins(knockedPins) > 10) {
                 throw new TooManyKnockedPins("Pins count in 1 frame cannot be more than 10");
             }
-            this._score.Add(new Roll(knockedPins, this.IsSecondRoll() ? 1 : 0));
         }
-
+        
+        private int GetStrikesCount() {
+            return _score.Where(x => x.IsStrike()).Count();
+        }
+        private IEnumerable<Roll> GetRollsWithoutStrikes() {
+            return this._score.Where(x => !x.IsStrike());
+        }
         private bool IsSecondRoll() {
-            var scoreWithoutStrikes = this._score.Where(x => !x.IsStrike());
+            var scoreWithoutStrikes = this.GetRollsWithoutStrikes();
             return scoreWithoutStrikes.Any() && scoreWithoutStrikes.Count() % 2 != 0;
         }
 
