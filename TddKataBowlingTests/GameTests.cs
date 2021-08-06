@@ -16,14 +16,11 @@ namespace TddKataBowlingTests {
 
         [Test]
         public void WhenRollStrikeAnd5And3_ThenScore26() {
-            var game = new Game();
+            var game = Create.Game.WithRolls(10, 5, 3).Please();
 
-            game.Roll(10);// 10
-            game.Roll(5);// 10
-            game.Roll(3);// 6
             var score = game.GetScore();
-
-            Assert.AreEqual(26, score);
+			
+            Assert.AreEqual(26,score);
         }
 
         [Test]
