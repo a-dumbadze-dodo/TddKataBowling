@@ -41,5 +41,5 @@ namespace TddKataBowlingTests
 				actual: result
 			);
 		}
-	}
+    }
 }

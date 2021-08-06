@@ -36,7 +36,7 @@ namespace TddKataBowlingTests
 			game.Roll(3);
 			var score = game.GetScore();
 			
-			Assert.AreEqual(score,16);
+			Assert.AreEqual(16,score);
 
 		}
 
@@ -50,13 +50,17 @@ namespace TddKataBowlingTests
 			});
 		}
 
-		[Test]
-		public void WhenRollMoreThan10_ThenConstraintFrameException() {
-			var game = new Game();
+        [Test]
+        public void WhenAdjacentRollsInTotalAreEqual10_ThenDontCountItAsASpare () {
+            var game = new Game();
+            game.Roll(3);
+            game.Roll(5);
+            game.Roll(5);
+            game.Roll(1);
 
-			Assert.Throws<TooManyKnockedPins>(() => {
-				game.Roll(11);
-			});
-		}
+            var result = game.GetScore();
+            
+            Assert.AreEqual(14, result);
+        }
 	}
 }
