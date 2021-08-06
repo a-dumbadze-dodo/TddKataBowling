@@ -1,5 +1,3 @@
-using System;
-using System.Reflection.PortableExecutable;
 using NUnit.Framework;
 using TddKataBowling;
 
@@ -7,13 +5,6 @@ namespace TddKataBowlingTests
 {
 	public class Tests
 	{
-		[SetUp]
-		public void Setup()
-		{
-			
-			
-		}
-
 		[Test]
 		public void WhenRoll1_ThenScore1() {
 			var knockedPins = 1;
@@ -53,11 +44,19 @@ namespace TddKataBowlingTests
 		public void WhenRollMoreThan10In1Frame_ThenConstraintFrameException() {
 			var game = new Game();
 
-			Assert.Throws<ConstraintFrameException>(() => {
+			Assert.Throws<TooManyKnockedPins>(() => {
 				game.Roll(6);
 				game.Roll(6);
 			});
+		}
 
+		[Test]
+		public void WhenRollMoreThan10_ThenConstraintFrameException() {
+			var game = new Game();
+
+			Assert.Throws<TooManyKnockedPins>(() => {
+				game.Roll(11);
+			});
 		}
 	}
 }
