@@ -6,15 +6,22 @@ namespace TddKataBowling {
     public class Game {
         private List<Roll> _score { get; }
 
+        private List<Frame> _frames { get; }
         public Game() {
+            this._frames = new List<Frame>();
             this._score = new();
         }
 
         public void Roll(int knockedPins) {
             this.ValidateForAddScore(knockedPins);
+            var frame = this._frames.LastOrDefault() ?? new Frame();
+            if (frame.IsCompleted()) {
+                frame = new Frame();
+                this._frames.Add(frame);
+            }            
             this._score.Add(new Roll(knockedPins, this.IsSecondRoll() ? 1 : 0));
+            frame.AddRoll(new Roll(knockedPins, this.IsSecondRoll() ? 1 : 0));
         }
-
         private void ValidateForAddScore(int knockedPins) {
             var strikes = this.GetStrikesCount();
             var rollWithoutStrikesCount = this.GetRollsWithoutStrikes().Count();
