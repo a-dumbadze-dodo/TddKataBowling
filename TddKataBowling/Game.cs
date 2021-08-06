@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace TddKataBowling
@@ -13,8 +11,12 @@ namespace TddKataBowling
 		}
 
 		public void Roll(int knockedPins) {
+			if (knockedPins > 10) {
+				throw new TooManyKnockedPins("More than 10 pins are knocked in one roll");
+			}
+			
 			if (this.IsSecondRoll() &&  GetLastScoreWithCurrentKnockedPins(knockedPins) > 10 ) {
-					throw new ConstraintFrameException("Pins count in 1 frame cannot be more than 10");
+					throw new TooManyKnockedPins("Pins count in 1 frame cannot be more than 10");
 			}
 			this._score.Add(knockedPins);
 		}
