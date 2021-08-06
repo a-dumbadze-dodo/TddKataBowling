@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TddKataBowling
 {
@@ -18,24 +20,24 @@ namespace TddKataBowling
 
 		public int GetScore()
 		{
-			var result = 0;
-			for (int i = 0; i < _score.Count; i++)
-			{
-				var currentKnockedPins = _score[i];
-				var previousKnockedPins = i < 1 ? 0 : _score[i - 1];
-				var previous2KnockedPins = i < 2 ? 0 : _score[i - 2];
-				var isSpare = previous2KnockedPins + previousKnockedPins==10;
-				if (previousKnockedPins == 10 || previous2KnockedPins == 10 || isSpare)
+			return _score.ZipPreviousTriple()
+				.Select(tuple =>
 				{
-					result += currentKnockedPins * 2;
-				}
-				else
-				{
-					result += currentKnockedPins;
-				}
-			}
-			
-			return result;
+					var (previous2KnockedPins, previousKnockedPins, currentKnockedPins) = tuple;
+					var isSpare = previous2KnockedPins + previousKnockedPins == 10;
+					var isStrike = previousKnockedPins == 10 || previous2KnockedPins == 10; 
+					int result;
+					if (isStrike || isSpare)
+					{
+						result = currentKnockedPins * 2;
+					}
+					else
+					{
+						result = currentKnockedPins;
+					}
+
+					return result;
+				}).Sum();
 		}
 	}
 }
