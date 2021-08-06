@@ -1,23 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace TddKataBowling
 {
-	public class Game
-	{
+	public class Game {
 		private List<int> _score { get; set; }
 
-		public Game()
-		{
+		public Game() {
 			this._score = new List<int>();
 		}
 
-		public void Roll(int knockedPins)
-		{
+		public void Roll(int knockedPins) {
+			if (this.IsSecondRoll() &&  GetLastScoreWithCurrentKnockedPins(knockedPins) > 10 ) {
+					throw new ConstraintFrameException("Pins count in 1 frame cannot be more than 10");
+			}
 			this._score.Add(knockedPins);
 		}
-
+		private bool IsSecondRoll() {
+			var scoreWithoutStrikes = this._score.Where(x => x != 10);
+			return scoreWithoutStrikes.Any() && scoreWithoutStrikes.Count() % 2 != 0;
+		}
+		private int GetLastScoreWithCurrentKnockedPins(int knockedPins) {
+			return this._score.Last() + knockedPins;
+		}
 		public int GetScore()
 		{
 			return _score.ZipPreviousTriple()

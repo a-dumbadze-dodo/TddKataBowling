@@ -1,3 +1,4 @@
+using System;
 using System.Reflection.PortableExecutable;
 using NUnit.Framework;
 using TddKataBowling;
@@ -25,7 +26,7 @@ namespace TddKataBowlingTests
 		}
 		
 		[Test]
-		public void WhenRollStrikeAnd5And3_ThanScore26() {
+		public void WhenRollStrikeAnd5And3_ThenScore26() {
 			var game = new Game();
 			
 			game.Roll(10); // 10
@@ -37,7 +38,7 @@ namespace TddKataBowlingTests
 		}
 
 		[Test]
-		public void WhenRollSpareAnd3_ThanScore16() {
+		public void WhenRollSpareAnd3_ThenScore16() {
 			var game = new Game();
 			game.Roll(4);
 			game.Roll(6);
@@ -45,6 +46,17 @@ namespace TddKataBowlingTests
 			var score = game.GetScore();
 			
 			Assert.AreEqual(score,16);
+
+		}
+
+		[Test]
+		public void WhenRollMoreThan10In1Frame_ThenConstraintFrameException() {
+			var game = new Game();
+
+			Assert.Throws<ConstraintFrameException>(() => {
+				game.Roll(6);
+				game.Roll(6);
+			});
 
 		}
 	}
